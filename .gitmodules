@@ -1,0 +1,18 @@
+[submodule "entry1246/multisig"]
+	path = entry1246/multisig
+	url = https://github.com/aqoleg/multisig.git
+[submodule "entry1261/pool_ton"]
+	path = entry1261/pool_ton
+	url = https://github.com/vanasprin/pool_ton.git
+[submodule "entry1266/ton_fungible_token"]
+	path = entry1266/ton_fungible_token
+	url = https://github.com/adoriasoft/ton_fungible_token.git
+[submodule "entry1266/ton_payment_mixer"]
+	path = entry1266/ton_payment_mixer
+	url = https://github.com/adoriasoft/ton_payment_mixer.git
+[submodule "entry1267/ton_challenge_2"]
+	path = entry1267/ton_challenge_2
+	url = https://github.com/JIoJIaJIu/ton_challenge_2.git
+[submodule "entry1268/tongate"]
+	path = entry1268/tongate
+	url = https://github.com/kelvich/tongate
