@@ -1,0 +1,66 @@
+// automatically generated from `../../src/crypto/smartcont/stdlib.fc` `fc/0.fc` 
+DECLPROC sum
+DECLPROC recv_internal
+sum PROC:<{
+  0 PUSHINT
+  WHILE:<{
+    OVER
+    0 GTINT
+  }>DO<{
+    OVER
+    1 PUSHINT
+    AND
+    IF:<{
+      INC
+    }>
+    SWAP
+    1 RSHIFT#
+    SWAP
+  }>
+  NIP
+}>
+recv_internal PROC:<{
+  4 LDU
+  SWAP
+  sum CALLDICT
+  SWAP
+  8 LDU
+  SWAP
+  sum CALLDICT
+  SWAP
+  16 LDU
+  SWAP
+  sum CALLDICT
+  SWAP
+  32 LDU
+  SWAP
+  sum CALLDICT
+  SWAP
+  64 LDU
+  SWAP
+  sum CALLDICT
+  SWAP
+  128 LDU
+  SWAP
+  sum CALLDICT
+  SWAP
+  256 LDU
+  DROP
+  sum CALLDICT
+  -1 PUSHINT
+  sum CALLDICT
+  NEWC
+  2 STU
+  s1 s7 XCHG
+  4 STU
+  s1 s5 XCHG
+  8 STU
+  s1 s3 XCHG
+  16 STU
+  32 STU
+  64 STU
+  128 STU
+  256 STU
+  ENDC
+  c4 POP
+}>

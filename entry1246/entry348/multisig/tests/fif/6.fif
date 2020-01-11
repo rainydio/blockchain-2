@@ -1,0 +1,136 @@
+// automatically generated from `../../src/crypto/smartcont/stdlib.fc` `fc/6.fc` 
+DECLPROC sum
+DECLPROC recv_internal
+sum PROC:<{
+  0 PUSHINT
+  WHILE:<{
+    OVER
+    0 GTINT
+  }>DO<{
+    OVER
+    1 PUSHINT
+    AND
+    IF:<{
+      INC
+    }>
+    SWAP
+    1 RSHIFT#
+    SWAP
+  }>
+  NIP
+}>
+recv_internal PROC:<{
+  4 LDU
+  SWAP
+  0 EQINT
+  IFJMP:<{
+    DROP
+  }>
+  LDREF
+  SWAP
+  CTOS
+  DUP
+  HASHSU
+  SWAP
+  32 LDU
+  32 LDU
+  1000 PUSHINT
+  ROT
+  GREATER
+  35 THROWIF
+  LDREF
+  DROP
+  c4 PUSH
+  CTOS
+  32 LDU
+  s1 s3 XCPU
+  NEQ
+  33 THROWIF
+  8 LDU
+  0 PUSHINT
+  1 PUSHINT
+  s2 PUSH
+  UNTIL:<{
+    LDREF
+    DROP
+    CTOS
+    256 LDU
+    s9 PUSH
+    UNTIL:<{
+      LDREF
+      DROP
+      CTOS
+      256 LDU
+      s3 s1 PUXC
+      EQUAL
+      IF:<{
+        9 PUSHPOW2
+        LDSLICEX
+        s10 s1 PUXC
+        s4 PUSH
+        CHKSIGNU
+        IF:<{
+          s4 s3 XCPU
+          OR
+        }>ELSE<{
+          s0 s4 XCHG
+        }>
+      }>ELSE<{
+        s0 s4 XCHG
+      }>
+      s4 PUSH
+      SREFS
+      0 EQINT
+      s1 s5 XCHG
+    }>
+    DROP
+    NIP
+    SWAP
+    1 LSHIFT#
+    OVER
+    SREFS
+    0 EQINT
+    s1 s2 XCHG
+  }>
+  2DROP
+  s5 POP
+  s5 POP
+  s3 PUSH
+  0 EQINT
+  34 THROWIF
+  ACCEPT
+  s0 s3 XCHG
+  sum CALLDICT
+  s3 PUSH
+  GEQ
+  IF:<{
+    3 PUSHINT
+    SENDRAWMSG
+  }>ELSE<{
+    DROP
+  }>
+  s0 s2 XCHG
+  LDREF
+  NEWC
+  WHILE:<{
+    OVER
+    SREFS
+  }>DO<{
+    SWAP
+    LDREF
+    DROP
+    CTOS
+    32 LDU
+    s0 s2 XCHG
+    32 STU
+  }>
+  NIP
+  s0 s3 XCHG
+  INC
+  s0 s3 XCHG2
+  32 STU
+  8 STU
+  STREF
+  ENDC
+  c4 POP
+}>

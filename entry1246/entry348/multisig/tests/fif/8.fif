@@ -1,0 +1,197 @@
+// automatically generated from `../../src/crypto/smartcont/stdlib.fc` `fc/8.fc` 
+DECLPROC sum
+DECLPROC recv_internal
+sum PROC:<{
+  0 PUSHINT
+  WHILE:<{
+    OVER
+    0 GTINT
+  }>DO<{
+    OVER
+    1 PUSHINT
+    AND
+    IF:<{
+      INC
+    }>
+    SWAP
+    1 RSHIFT#
+    SWAP
+  }>
+  NIP
+}>
+recv_internal PROC:<{
+  4 LDU
+  SWAP
+  0 EQINT
+  IFJMP:<{
+    DROP
+  }>
+  LDREF
+  SWAP
+  CTOS
+  DUP
+  HASHSU
+  SWAP
+  32 LDU
+  32 LDU
+  1000 PUSHINT
+  s2 PUSH
+  GREATER
+  35 THROWIF
+  LDREF
+  DROP
+  c4 PUSH
+  CTOS
+  32 LDU
+  s1 s4 XCPU
+  NEQ
+  33 THROWIF
+  8 LDU
+  0 PUSHINT
+  1 PUSHINT
+  s2 PUSH
+  UNTIL:<{
+    LDREF
+    DROP
+    CTOS
+    256 LDU
+    s10 PUSH
+    UNTIL:<{
+      LDREF
+      DROP
+      CTOS
+      256 LDU
+      s3 s1 PUXC
+      EQUAL
+      IF:<{
+        9 PUSHPOW2
+        LDSLICEX
+        s11 s1 PUXC
+        s4 PUSH
+        CHKSIGNU
+        IF:<{
+          s4 s3 XCPU
+          OR
+        }>ELSE<{
+          s0 s4 XCHG
+        }>
+      }>ELSE<{
+        s0 s4 XCHG
+      }>
+      s4 PUSH
+      SREFS
+      0 EQINT
+      s1 s5 XCHG
+    }>
+    DROP
+    NIP
+    SWAP
+    1 LSHIFT#
+    OVER
+    SREFS
+    0 EQINT
+    s1 s2 XCHG
+  }>
+  2DROP
+  s6 POP
+  s6 POP
+  s4 PUSH
+  0 EQINT
+  34 THROWIF
+  TRUE
+  ACCEPT
+  s5 PUSH
+  sum CALLDICT
+  s2 PUSH
+  GEQ
+  IF:<{
+    DROP
+    FALSE
+    s2 PUSH
+    3 PUSHINT
+    SENDRAWMSG
+  }>
+  s2 PUSH
+  HASHCU
+  s0 s7 XCHG
+  LDREF
+  NEWC
+  WHILE:<{
+    OVER
+    SREFS
+  }>DO<{
+    SWAP
+    LDREF
+    DROP
+    CTOS
+    32 LDU
+    1000 PUSHINT
+    s2 PUSH
+    LESS
+    IF:<{
+      128 LDU
+      256 LDU
+      TRUE
+      s4 s10 XCPU
+      EQUAL
+      s2 s13 XCPU
+      EQUAL
+      s1 s2 XCHG
+      AND
+      IF:<{
+        s5 PUSH
+        IF:<{
+          s1 s10 XCPU
+          OR
+          DUP
+          sum CALLDICT
+          s7 PUSH
+          GEQ
+          IF:<{
+            s2 POP
+            s4 POP
+            FALSE
+            FALSE
+            s7 PUSH
+            3 PUSHINT
+            SENDRAWMSG
+          }>ELSE<{
+            s0 s0 s5 XCHG3
+          }>
+        }>ELSE<{
+          s2 POP
+          s0 s4 XCHG2
+          FALSE
+          SWAP
+        }>
+        s2 s3 XCHG2
+        128 STU
+        1 STI
+        s1 s(-1) PUXC
+        1 STI
+      }>ELSE<{
+        s0 s5 XCHG
+        s3 s1 s3 XCHG3
+        2DROP
+      }>
+    }>ELSE<{
+      s4 s4 s4 XCHG3
+      DROP
+    }>
+    s1 s3 XCHG
+  }>
+  NIP
+  s2 POP
+  s3 POP
+  s3 POP
+  s4 POP
+  s4 POP
+  SWAP
+  INC
+  SWAP
+  32 STU
+  8 STU
+  STREF
+  ENDC
+  c4 POP
+}>
