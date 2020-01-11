@@ -124,4 +124,4 @@ sbitrefs rot brembitrefs rot >= -rot < and
 [1266 by nice llama]: https://contest.com/blockchain-2/entry1266
 [erc20]: https://github.com/adoriasoft/ton_fungible_token
 [ring-signature based mixer]: https://github.com/adoriasoft/ton_payment_mixer
-[pr#218 by blackyblack]: https://github.com/ton-blockchain/ton/pull/218
+[pr218 by blackyblack]: https://github.com/ton-blockchain/ton/pull/218
