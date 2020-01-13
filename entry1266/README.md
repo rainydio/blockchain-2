@@ -13,11 +13,11 @@
 
 ### Multiple non-interchangeable networks
 
-Заявлено как фича! Контракт не дает пересылать токены между воркчейнами. Дикшинари с балансами вложен в дикшинари с воркчейнами. Функции обработки воркчейнов и ошибок идут "поверх" балансов. Еще и разным почерком написаны. В общем кто-то за кем-то дописывал. Можно было просто реджекнуть если не воркчейн контракта, раз уж так получилось.
+It's a feature! Contract doesn't allow to send tokens between workchains. Dictionary with balances is stored within dictionary with workchains. Functions that handle workchains and errors are wrapped around balance functions. They were clearly written afterwards by a different person. Could have just rejected any message from workchain different than used by contract.
 
-### Создание токенов
+### Minting tokens
 
-В контракте нет механизма создания токенов. В примере значение supply присваивается на баланс одному адресу, который потом отдельными трансферами должен его раздавать.
+There is no mechanism for minting tokens. In example `deploy.fif` whole supply is assigned to owner address. And owner has to send those out through separate transfers.
 
 ```fsharp
 // setup balances to give owner_address the entire supply
@@ -26,20 +26,11 @@ variable network_balances dictnew network_balances !
 <b network_balances @ ref, wc balances @ 8 b>idict! drop balances !
 ```
 
-В итоге supply это просто константа типа name, symbol, decimal. В настоящем ERC20 есть механизмы создания токенов, а supply это количество созданых токенов.
-
-Если создания токенов нет, тогда и симпл трансфер нужно реджектить.
-
-```clojure
-;; simple transfer with comment
-if (op == ApiOps::None()) {
-	return();
-}
-```
+As result `supply` is just another constant like `name`, `symbol`, and `decimal`. In real ERC20 supply sum of tokens minted so far.
 
 ### Ready to use with lite-client
 
-Методы баланса и апрувала просто весь дикшинари возвращают. Комментарий забыли обновить, там еще один дикшинари с воркчейнами.
+Couple of methods simply return whole dictionary with balances. And they forgot to update comment there, it's now wrapped into workchain dictionary.
 
 ```clojure
 ;; get balances dictionary (owner -> balance)
@@ -55,11 +46,11 @@ cell getapprovals() method_id {
 }
 ```
 
-Потом кто-то дописал `getbalance`, там нормально.
+At the same time `getbalance` is more advanced, and walks through dictionaries to get balance.
 
-### Нет интернал операций
+### Contract doesn't handle queries
 
-Что же это за ERC20 который нельзя спросить баланс из другого контракта?
+What kind of ERC20 is it, if it cannot be asked about balance from another contract?
 
 ## [Ring-signature based mixer]
 
@@ -73,13 +64,13 @@ cell getapprovals() method_id {
 > - Ring signatures on funC
 > - Prepare contract offchain and process withdrawals onchain
 
-## RSA on funC, Ring signatures on funC
+### RSA on funC
 
-Не шарю в криптографии на столько, чтобы проверить. Но ключи маленькие и использовать это нельзя. Вся суть ведь в RSA с большими ключами. В общем это не совсем _RSA on funC_.
+Keys are small, so this implementation cannot be used. Whole difficulty of implementing _RSA on funC_ has to with key size.
 
-## Prepare contract offchain
+### Ring signatures serve no purpose
 
-Не шарю в криптографии на столько, чтобы знать как маскировать транзакции. Но ringsig точно надо использовать не так. Там на самом деле есть `approve_addresses` по которому и проходит авторизация, а ringsig это какой-то лишний элемент. Если я видел любую подпись и мой адрес в `approve_addresses`, то я смогу вывести реплейнув ту подпись (ringsig же). Так что если бы там были просто ключи (хотя зачем?), то было бы безопасней.
+Withdrawal is authorized by `approve_addresses` dictionary, and then additionally signature is checked. Nothing really changes if ring signatures are completely dropped.
 
 ```clojure
 (int exist, int index) = if_exist(approve_addresses, number_of_participants, addr);
@@ -88,9 +79,9 @@ if(exist == 0) {
 }
 ```
 
-## ... and process withdrawals onchain
+### Funds lock-out
 
-Контракт требует депозиты от всех участников перед тем как согласится отдавать. Если один из участников не отправит, то другие будут так и сидеть. Не отправляя депозит я ничем не рискую, а могу и заработать. Ребятам которые ждут теперь чтобы забрать свои деньги выгодно скинуться и отправить вместо меня.
+Contract refuses to process withdrawal until all deposits were made. There is no way to bail out. If attacker can lure victims into contract and then refuse to send his deposit they are likely to divide losses providing profit for attacker.
 
 ```clojure
 if(get_balance().first() > number_of_participants * payment_amount) {
@@ -101,21 +92,17 @@ if(money_available == 0) {
 }
 ```
 
-## Мелочи всякие
-
-Перменную эту `money_available` не понятно зачем в data пишут. Сообщения пытаются отправлять с 0 грам и без мод 64. Дикшинари `approve_addresses` как массив индексирован.
-
 ## [PR218 by blackyblack]
 
 > body-cell slice bits are calculated before 1 i flag so there is a case when builder has exactly the body-cell length bits left and body-cell won't fit.
 
-Все так, только вместо:
+Correct, but instead:
 
 ```fsharp
 sbitrefs swap 1 + swap rot brembitrefs rot >= -rot <= and
 ```
 
-Лучше:
+better:
 
 ```fsharp
 sbitrefs rot brembitrefs rot >= -rot < and
