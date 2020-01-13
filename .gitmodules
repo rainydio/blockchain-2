@@ -1,18 +1,51 @@
 [submodule "entry1246/multisig"]
 	path = entry1246/multisig
-	url = https://github.com/aqoleg/multisig.git
+	url = https://github.com/aqoleg/multisig
 [submodule "entry1261/pool_ton"]
 	path = entry1261/pool_ton
-	url = https://github.com/vanasprin/pool_ton.git
+	url = https://github.com/vanasprin/pool_ton
 [submodule "entry1266/ton_fungible_token"]
 	path = entry1266/ton_fungible_token
-	url = https://github.com/adoriasoft/ton_fungible_token.git
+	url = https://github.com/adoriasoft/ton_fungible_token
 [submodule "entry1266/ton_payment_mixer"]
 	path = entry1266/ton_payment_mixer
-	url = https://github.com/adoriasoft/ton_payment_mixer.git
+	url = https://github.com/adoriasoft/ton_payment_mixer
 [submodule "entry1267/ton_challenge_2"]
 	path = entry1267/ton_challenge_2
-	url = https://github.com/JIoJIaJIu/ton_challenge_2.git
+	url = https://github.com/JIoJIaJIu/ton_challenge_2
 [submodule "entry1268/tongate"]
 	path = entry1268/tongate
 	url = https://github.com/kelvich/tongate
+[submodule "entry1259/dota2_autochess_but_bring_your_own_figures"]
+	path = entry1259/dota2_autochess_but_bring_your_own_figures
+	url = https://github.com/copperbasin/dota2_autochess_but_bring_your_own_figures
+[submodule "entry1259/Ton-Hack"]
+	path = entry1259/Ton-Hack
+	url = https://github.com/KStasi/Ton-Hack
+[submodule "entry1255/blocklab-ton_contest_2"]
+	path = entry1255/blocklab-ton_contest_2
+	url = https://github.com/qpIlIpp/blocklab-ton_contest_2
+[submodule "entry1254/ico"]
+	path = entry1254/ico
+	url = https://github.com/plexar88/ico
+[submodule "entry1272/ton-wallet"]
+	path = entry1272/ton-wallet
+	url = https://github.com/poma/ton-wallet
+[submodule "entry1269/ton-freestyle"]
+	path = entry1269/ton-freestyle
+	url = https://github.com/Skydev0h/ton-freestyle
+[submodule "entry1264/tonGame"]
+	path = entry1264/tonGame
+	url = https://github.com/Arseny271/tonGame
+[submodule "entry1262/cheques"]
+	path = entry1262/cheques
+	url = https://github.com/catchain/cheques
+[submodule "entry1260/ton-delegation-pool"]
+	path = entry1260/ton-delegation-pool
+	url = https://github.com/button-tech/ton-delegation-pool
+[submodule "entry1247/ts"]
+	path = entry1247/ts
+	url = https://github.com/5eraph/ts
+[submodule "entry1247/sw"]
+	path = entry1247/sw
+	url = https://github.com/5eraph/sw

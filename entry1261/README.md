@@ -52,7 +52,7 @@ I'm not sure if `member_stake` wasn't added to `msg_value` on purpose during `mi
 
 Because GR\$1 is sent back and the rest can be withdrawn later it is possible to drain contract out of funds. That `accept_message` makes no sense, but removing it doesn't remove the threat.
 
-Instead different techinque that is used by [Mellow Squid] can be implemented here:
+Instead different techinque that is used by [Mellow Squid] and [Shiny Giraffe] can be implemented here:
 
 ```clojure
 raw_reserve(get_balance().first() - 1000000000, 0);
@@ -128,3 +128,4 @@ if (in_msg.slice_empty?()) {
 [1268 by slim dodo]: https://contest.com/blockchain-2/entry1261
 [stake pool]: https://github.com/vanasprin/pool_ton
 [mellow squid]: ../entry1265
+[shiny giraffe]: ../entry1269
