@@ -64,7 +64,7 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Low quality. Simple. Only 4 example contracts to hack and they aren't well thought.
 
 - [1260 TON Delegation Pool Platform by Night Turkey] (no review).  
-  Very high quality. Complex. Something real.
+  Complex. Something real.
 
 - [1261 Stake pool by Slim Dodo] (complete review).  
   Ok quality. Complex. Almost does what it claims. Pool controlled by administrator. Potential funds lock-out. Can be drained.
@@ -94,7 +94,7 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Primitive C++ client-server. Server is discovered through TON DHT.
 
 - [1269/1 Conditional transfer by Shiny Giraffe] (shallow review).  
-  Ok quality. Complex. Mixes controller address and public key.
+  Ok quality. Complex. Contradictory claims. Mixes controller address and public key.
 
 - [1269/2 Data storage proxy by Shiny Giraffe] (shallow review).  
   Ok quality. Complex. Almost does what it claims. I don't understand the purpose.

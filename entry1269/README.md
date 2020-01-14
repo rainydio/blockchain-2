@@ -2,28 +2,26 @@
 
 ## [Conditional transfer]
 
-> - **Minimum amount of collected grams** - this allows to set how much grams have to be on the balance of this smart contract in order to pass > collected grams to beneficiaries
-> - **Maximum amount of collected grams** - this lets ceiling the amount of grams to be collected, any amount that overflows this will be > immediately returned to sender
-> - **Minimum accepted amount** - combats dust by enforcing minimum amount per each message
-> - **Collection deadline** - enforces that **minimum amount** shall be collected by this time, otherwise all collected grams will become > reclaimable by senders
-> - **Release locktime** - makes it that neither releasing or reclaiming collected grams is not possible until this specified moment (if > collection was successful, of course)
-> - **Release deadline** - by this moment money should be released or refunded, in case it is not done by this moment, next incoming message will > trigger the action or change
-> - **Continuous collection flag** - it is possible to permit (or deny) continuing of collection of grams even after **collection deadline** have > passed (if target was reached successfully)
-> - **Automatic release** - it is possible to specify whether money should be released to beneficiaries or refunded to senders if decision is not > made by **release deadline**
-> - **Controller support** - an external entity may control this contract, either a user with signed external messages, or another smart contract > via internal messages. The control is limited to releasing money to beneficiaries or refunding them to senders, if allowed by deadlines and > locktime.
-> - **Multiple beneficiaries support** - it is possible to specify multiple beneficiaries, and what they should receive upon releasing grams: a > fixed amount of grams or a percentage against the total balance of contract. There always must be ultimate beneficiary which will receive all > remaining grams from the balance of the contract after distributing it to another beneficiaries.
-> - **Ultimate simplicity for users** - putting money into the contract and reclaiming it does not require any special programs or constructing > special messages: contract will automatically receive and account for received funds, and if the contract is in collect phase, will > automatically attempt to return any amount that is due to the user, no any commands and special queries required, simple transfer from the > wallet should suffice.
-> - **Getter methods** - there are several getter methods implemented that allows to easily check some important status information about the > contract.
+> - _Multiple beneficiaries_ receiving percentage or fixed amount.
+> - Optional _controller_ that can either _release_ money to beneficiaries or enable _reclaims_.
+> - _Controller_ can be either public key or address.
+> - _Deposit_ and _reclaim_ through simple transfer depending on contract mode.
+> - _Minimum amount_ that has to be collected or _reclaims_ will be enabled.
+> - _Maximum amount_ that has to be collected. Futhure transfers will be returned back to sender.
+> - _Minimum accepted amount_ that will not be returned back to sender.
+> - _Collection deadline_. Aftewards _reclaims_ are enabled if _minimum amount_ isn't collected.
+> - _Continuous collection flag_. Disables _collection deadline_.
+> - _Realease locktime_ until neither _reclaims_ nor _release_ is possible.
+> - _Release deadline_. Next message after deadline triggers _reclaim_ or _release_ (specified by whom???).
+> - _Automatic release_. Default (_reclaim_ or _release_) when no decision was made by _release deadline_.
+
+_There are contradictory claims! Reviewing..._
 
 Ok quality. Complex. Tuples as structure element!
 
-### Mixing controller address and public key
-
-There is controller role that can release funds and initiate reclaim. It can be either public key or address. That creates several difficulties.
-
 #### Destroyed check
 
-Internal message handler begins with check of destroyed flag, that will immediately send everything to beneficiary:
+Mixing public key and address creates difficulties. Internal message handler begins with check of destroyed flag, that will immediately send everything to beneficiary:
 
 ```clojure
 () recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
@@ -61,7 +59,7 @@ It appears that multiple beneficiaries were added later. There is main beneficia
 
 Commented out line indicates attempts to send message properly. I guess that destroyed flag check was added to internal handler when message was failing. Then Shiny Giraffe finally settled on suppressing errors with +2 flag. There is also comment about disabled functionaly and high precision percentages. Maybe it's somehow related.
 
-I don't really know if this function may raise exception. But if it does, then some beneficiary would not see their money. They all gonna be taken by main beneficiary through internal handler.
+I don't really know if this function may raise exception. But if it does, then some beneficiaries would not see their money. They all gonna be taken by main beneficiary through internal handler.
 
 ## [Data storage proxy]
 
@@ -93,7 +91,7 @@ This isn't true. External message handler checks only signature of contract owne
 
 ### Proxying does not include box name
 
-I was under assumption, that some _client contract_ will store information in this user's data storage proxy. Later user client software may proxy call that information into _client contract_. But if box name isn't sent then there is no way to authenticate which box _client contract_ received. For all purposes this may be information filled by someone else:
+If box name isn't sent there is no way to authenticate which box _target contract_ received. For all purposes this may be information filled by someone else:
 
 ```clojure
 () recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
@@ -107,6 +105,8 @@ I was under assumption, that some _client contract_ will store information in th
   }
 }
 ```
+
+Usages proposed by Shiny Giraffe are to synthetic. I was trying to invent one where _target contract_ stores information in this user's data storage proxy. Later user's client software may proxy call that information into _target contract_. But without name that can be anyones information.
 
 [1269 by shiny giraffe]: https://contest.com/blockchain-2/entry1269
 [conditional transfer]: https://github.com/Skydev0h/ton-freestyle/blob/45b5c9df9fb193dab824b75a37c8b810f7f05bef/src/ct/ctsc.fc
