@@ -7,4 +7,4 @@
 Primitive C++ client-server application. Server is discovered through TON DHT. Compiles.
 
 [1268 by big elk]: https://contest.com/blockchain-2/entry1268
-[ton gate]: https://github.com/kelvich/tongate
+[ton gate]: tongate

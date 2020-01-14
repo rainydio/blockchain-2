@@ -49,3 +49,15 @@
 [submodule "entry1247/sw"]
 	path = entry1247/sw
 	url = https://github.com/5eraph/sw
+[submodule "entry1271/apportion-ton-smc"]
+	path = entry1271/apportion-ton-smc
+	url = https://github.com/Vasylll/apportion-ton-smc
+[submodule "entry1270/ton-charity-foundation"]
+	path = entry1270/ton-charity-foundation
+	url = https://github.com/dblokhin/ton-charity-foundation
+[submodule "entry1265/TheChatGame"]
+	path = entry1265/TheChatGame
+	url = https://github.com/EmelyanenkoK/TheChatGame
+[submodule "entry1265/OracleHub"]
+	path = entry1265/OracleHub
+	url = https://github.com/EmelyanenkoK/OracleHub

@@ -2,25 +2,17 @@
 
 ## [Dota2 autochess]
 
-> This is our freaky custom variation of dota2 autochess. We tried to make it works somehow on TON smart-contracts. Key differences from original autochess:
->
-> - Match can't be free (so we need some way users pay)
-> - Figures' pool is dependent on what figures was in "players hand" they came with
-> - Figures can be bought in shop
+> - Figures' pool is dependent on what figures was in "players hand" they came with.
+> - Figures can be bought in shop.
 > - In-game rolls can't be requested from server frequently, so we split pool beyond players > each round evenly for each level but random.
-> - Player can't lock good roll
-> - Player can see all figures he have access. Access to "next line" costs 2 gold same as original. But now you have "spy eye"
-> - After player death in match his/her figures are not going back to pool.
+> - Player can't lock good roll.
+> - Player can see all figures he have access. Access to "next line" costs 2 gold same as original. But now you have "spy eye".
 
-Contract doesn't know game rules. Players can buy figures and contract builds board out of figures players choose once there are 8 of them.
-
-> In-game rolls can't be requested from server frequently, so we split pool beyond players > each round evenly for each level but random.
-
-They aren't talking about contract here.
+Low quality. Complex. Some claims aren't about contract.
 
 > After player death in match his/her figures are not going back to pool.
 
-Because contract doesn't know game rules.
+Because contract contract doesn't know game rules. This is only figure shop and simpliest matchmarking.
 
 ## [Ton-Hack]
 
@@ -52,10 +44,12 @@ if (op == 0xaaeecc) {
 
 ---
 
+There are no usual scripts that may help user create and test his ideas. Contracts and tasks aren't well thought:
+
 - First contract has unnecessary `set_c3`.
 - Second task asks to withdraw money from contract, but that contract can only be drained out to funds.
-- Although amount is already hardcoded to 0, third task asks to withdraw in single attempt.
+- Although amount is already hardcoded to 0, third task asks to withdraw in single attempt, and contract has attempts counter.
 
 [1259 by groovy fly]: https://contest.com/blockchain-2/entry1259
-[dota2 autochess]: https://github.com/copperbasin/dota2_autochess_but_bring_your_own_figures
-[ton-hack]: https://github.com/KStasi/Ton-Hack
+[dota2 autochess]: dota2_autochess_but_bring_your_own_figures/contracts/game-code.fc
+[ton-hack]: Ton-Hack/contracts

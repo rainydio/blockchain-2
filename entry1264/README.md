@@ -2,6 +2,22 @@
 
 ## [Lottery]
 
+> - Players buy any of 64 squares (or several).
+> - Later contract sets a win amount for each square.
+> - Contract will send money back on its own.
+
+Low quality. Simple. Does what it claims.
+
+### Address is taken from message
+
+Nothing particulary exploitable, but it's strange that address is taken from message body slice, instead of using source address:
+
+```clojure
+slice address = msg_body.preload_bits(264);
+```
+
+### Draining contract funds
+
 It is possible to drain contract out of funds, because it will return full `msg_value` back when buying zero squares.
 
 ```clojure
@@ -17,4 +33,4 @@ It is possible to drain contract out of funds, because it will return full `msg_
 ```
 
 [1264 by dreamy crab]: https://contest.com/blockchain-2/entry1264
-[lottery]: https://github.com/Arseny271/tonGame
+[lottery]: tonGame/casino.fc

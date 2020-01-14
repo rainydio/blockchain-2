@@ -2,9 +2,11 @@
 
 ## [Cheques]
 
-Original submission had major errors
+> - Owner can create cheque for specific amount that can be withdrawn by associated key.
 
-> Smart-contract for TON blockchain implementing service for managing cheques made by CAT. Cheques service provides a way for users to create a cheque for specific amount of Grams with associated key.
+Very low quality. Simple. Does what it claims. Original submission had major errors.
+
+### Poorly written
 
 Attempts to set gas limit in grams:
 
@@ -13,4 +15,4 @@ set_gas_limit(msg_value - grams);
 ```
 
 [1262 by grim duck]: https://contest.com/blockchain-2/entry1262
-[cheques]: https://github.com/catchain/cheques
+[cheques]: cheques/cheque/cheque-code.fc

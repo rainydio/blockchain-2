@@ -2,7 +2,7 @@
 
 ## [Multisig]
 
-Identical to [previous submission]. With only difference being readme converted to markdown.
+Identical to [previous submission] with only difference being readme converted to markdown.
 
 ```sh
 $ diff -qr entry348/multisig/ multisig/src/
@@ -12,5 +12,5 @@ Only in entry348/multisig/tests: wallets
 ```
 
 [1246 by suave beetle]: https://contest.com/blockchain-2/entry1246
-[multisig]: https://github.com/aqoleg/multisig
+[multisig]: multisig/src/contract.fc
 [previous submission]: https://contest.com/blockchain/entry348
