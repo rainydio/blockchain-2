@@ -109,5 +109,5 @@ I was under assumption, that some _client contract_ will store information in th
 ```
 
 [1269 by shiny giraffe]: https://contest.com/blockchain-2/entry1269
-[conditional transfer]: ton-freestyle/src/ct/ctsc.fc
-[data storage proxy]: ton-freestyle/src/dsp/dspsc.fc
+[conditional transfer]: https://github.com/Skydev0h/ton-freestyle/blob/45b5c9df9fb193dab824b75a37c8b810f7f05bef/src/ct/ctsc.fc
+[data storage proxy]: https://github.com/Skydev0h/ton-freestyle/blob/45b5c9df9fb193dab824b75a37c8b810f7f05bef/src/dsp/dspsc.fc

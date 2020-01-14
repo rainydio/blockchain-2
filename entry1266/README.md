@@ -108,6 +108,6 @@ sbitrefs rot brembitrefs rot >= -rot < and
 ```
 
 [1266 by nice llama]: https://contest.com/blockchain-2/entry1266
-[erc20]: ton_fungible_token/token-contract.fc
-[ring-signature based mixer]: ton_payment_mixer/src/laundromat.fc
+[erc20]: https://github.com/adoriasoft/ton_fungible_token/blob/feb80f612dd7b6cd68f21d7526444c97ab4a513f/token-contract.fc
+[ring-signature based mixer]: https://github.com/adoriasoft/ton_payment_mixer/blob/6e87a6d4452db30148ae733dfca75881054348f5/src/laundromat.fc
 [pr218 by blackyblack]: https://github.com/ton-blockchain/ton/pull/218

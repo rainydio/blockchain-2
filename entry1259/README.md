@@ -51,5 +51,5 @@ There are no usual scripts that may help user create and test his ideas. Contrac
 - Although amount is already hardcoded to 0, third task asks to withdraw in single attempt, and contract has attempts counter.
 
 [1259 by groovy fly]: https://contest.com/blockchain-2/entry1259
-[dota2 autochess]: dota2_autochess_but_bring_your_own_figures/contracts/game-code.fc
-[ton-hack]: Ton-Hack/contracts
+[dota2 autochess]: https://github.com/copperbasin/dota2_autochess_but_bring_your_own_figures/blob/f3da3540f9b30c41c4d9879d98ef9456db599056/contracts/game-code.fc
+[ton-hack]: https://github.com/KStasi/Ton-Hack/tree/d0b19f7b1b94688f6569dc4831e6aa27ea2e1014/contracts

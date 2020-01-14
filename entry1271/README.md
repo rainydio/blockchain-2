@@ -32,4 +32,4 @@ members~withdraw(tolerance, member_id, amount, msg);
 Note that `msg` can be loaded from input message, and `amount` claimed doesn't have to be equal to amount set in `msg`
 
 [1271 by dreamy pug]: https://contest.com/blockchain-2/entry1271
-[apportion group expense]: apportion-ton-smc/apportion-code.fc
+[apportion group expense]: https://github.com/Vasylll/apportion-ton-smc/blob/ca4c844f5d860fca460a3d40443955c9dbcaf6f4/apportion-code.fc

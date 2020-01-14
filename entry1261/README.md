@@ -112,4 +112,4 @@ if (in_msg.slice_empty?()) {
 ```
 
 [1268 by slim dodo]: https://contest.com/blockchain-2/entry1261
-[stake pool]: pool_ton/smartcont/pool-code.fc
+[stake pool]: https://github.com/vanasprin/pool_ton/blob/bbe4a6bb5cf27c1b4d80a9636c8a309a868014a5/smartcont/pool-code.fc

@@ -33,4 +33,4 @@ It is possible to drain contract out of funds, because it will return full `msg_
 ```
 
 [1264 by dreamy crab]: https://contest.com/blockchain-2/entry1264
-[lottery]: tonGame/casino.fc
+[lottery]: https://github.com/Arseny271/tonGame/blob/3aebfcd9b21c1861c1670e882baecbea41f52884/casino.fc

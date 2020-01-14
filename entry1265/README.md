@@ -8,7 +8,7 @@
 > - Game admins have no power to change inventories of outer users.
 > - Inner and outer users are equal with only differense that inner users has first 196 bits of their 'addresses' zeroed.
 
-Ok quality. Complex. Does what it claims.
+High quality. Complex. Does what it claims.
 
 It isn't simple or clean, but written carefuly. By using `raw_reserve` combined with `send_raw_message` mode 128 it handles fees correctly. External message handler used by admin loads user address with `in_msg~load_uint(64)`. This is how those 196 zeroes got there.
 
@@ -57,5 +57,5 @@ ifnot(request_found?) {
 Correct way is to first deduct fail fees, commit that, and then add difference with normal fee at the end.
 
 [1265 by mellow squid]: https://contest.com/blockchain-2/entry1265
-[the chat game]: entry1265/TheChatGame/collectibles.fc
-[oraclehub]: entry1265/OracleHub/oracle_hub.fc
+[the chat game]: https://github.com/EmelyanenkoK/TheChatGame/blob/a4c191d50f9f836d5b5467b333a63ed93f889887/collectibles.fc
+[oraclehub]: https://github.com/EmelyanenkoK/OracleHub/blob/9ffce55c4e5327a25f2969637a2f9161f8bd650b/oracle_hub.fc

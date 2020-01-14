@@ -79,5 +79,5 @@ return ();
 ```
 
 [1247 by small kitten]: https://contest.com/blockchain-2/entry1247
-[ticket system]: ts/ts/ts.fc
-[software validation]: sw/sw/sw.fc
+[ticket system]: https://github.com/5eraph/ts/blob/01d1ce013523701ea1a158778ac5158ba8cfb45d/ts/ts.fc
+[software validation]: https://github.com/5eraph/sw/blob/1b1e72d585b478c045add1849d39d5b3c6a49f93/sw/sw.fc

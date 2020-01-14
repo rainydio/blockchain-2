@@ -11,4 +11,4 @@ It sends 1% to address provided in internal message, and 99% to address stored i
 I don't get it.
 
 [1267 by funny owl]: https://contest.com/blockchain-2/entry1267
-[mlm]: ton_challenge_2/mlm/src/main.fc
+[mlm]: https://github.com/JIoJIaJIu/ton_challenge_2/tree/f8a851351213114d8e13f5e87c66d7254acfc368/mlm/src

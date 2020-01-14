@@ -45,4 +45,4 @@ The main difficulty with rating systems is that they are easy to game. This part
 ```
 
 [1255 by cuddly hamster]: https://contest.com/blockchain-2/entry1255
-[self regulated community]: blocklab-ton_contest_2/blockchain/smartcont
+[self regulated community]: https://github.com/qpIlIpp/blocklab-ton_contest_2/tree/e97255f25f4081887323f9add92d45064fa82d6c/blockchain/smartcont

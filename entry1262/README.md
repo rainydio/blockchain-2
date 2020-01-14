@@ -15,4 +15,4 @@ set_gas_limit(msg_value - grams);
 ```
 
 [1262 by grim duck]: https://contest.com/blockchain-2/entry1262
-[cheques]: cheques/cheque/cheque-code.fc
+[cheques]: https://github.com/catchain/cheques/blob/8a8de1dcad3e362697e3bdb92f963592ce333aad/cheque/cheque-code.fc

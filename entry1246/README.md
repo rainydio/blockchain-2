@@ -12,5 +12,5 @@ Only in entry348/multisig/tests: wallets
 ```
 
 [1246 by suave beetle]: https://contest.com/blockchain-2/entry1246
-[multisig]: multisig/src/contract.fc
+[multisig]: https://github.com/aqoleg/multisig/blob/20f6781df5852d1a6b0417ff3e57f9dda68d590f/src/contract.fc
 [previous submission]: https://contest.com/blockchain/entry348

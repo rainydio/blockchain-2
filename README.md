@@ -76,7 +76,7 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Low quality. Simple. Can be drained.
 
 - [1265 The Chat Game by Mellow Squid] (incomplete review).  
-  Ok quality. Complex. Carefully handles balance and fees.
+  High quality. Complex. Carefully handles balance and fees.
 
 - [1265 OracleHub by Mellow Squid] (incomplete review).  
   Ok quality. Complex. Can be drained.

@@ -25,4 +25,4 @@ Contract will always forward at least `msg_value`, it doesn't account processing
 If contract balance is lower than processing fees sending `msg_value` can't be achieved. Possible error is suppressed by mode 3, but campaign will be updated anyway.
 
 [1270 by dreamy snail]: https://contest.com/blockchain-2/entry1270
-[charity foundation]: ton-charity-foundation/charity-code.fc
+[charity foundation]: https://github.com/dblokhin/ton-charity-foundation/blob/8b1f603dd2407bd3f9f9827be24e35060411c6e3/charity-code.fc

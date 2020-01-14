@@ -77,4 +77,4 @@ I already pointed that out in the comments, but validator can both submit and co
 ```
 
 [1272 by lucky scorpion]: https://contest.com/blockchain-2/entry1272
-[wallet]: ton-wallet/contract/src/wallet.fc
+[wallet]: https://github.com/poma/ton-wallet/blob/003989a5b537854d32d74fb420d776563d6bfab9/contract/src/wallet.fc
