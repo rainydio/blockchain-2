@@ -72,6 +72,12 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 - [1262 Cheques by Grim Duck] (incomplete review).  
   Very low quality. Simple. Original had major errors. Attempts to set gas limit in grams.
 
+- [1263/1 Decentralized Exchange by Merry Ant] (shallow review).  
+  Very low quality. Complex. Extremely vulnerable.
+
+- [1263/2 TRC20 by Merry Ant] (complete review).  
+  Low quality. Simple. No minting. No balance or allowance queries. Vulnerable. Clean!
+
 - [1264 Lottery by Dreamy Crab] (incomplete review).  
   Low quality. Simple. Can be drained.
 
@@ -120,6 +126,8 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 [1260 ton delegation pool platform by night turkey]: entry1260#ton-delegation-pool-platform
 [1261 stake pool by slim dodo]: entry1261#stake-pool
 [1262 cheques by grim duck]: entry1262#cheques
+[1263/1 decentralized exchange by merry ant]: entry1263#decentralized-exchange
+[1263/2 trc20 by merry ant]: entry1263#trc20
 [1264 lottery by dreamy crab]: entry1264#lottery
 [1265 the chat game by mellow squid]: entry1265#the-chat-game
 [1265 oraclehub by mellow squid]: entry1265#oraclehub

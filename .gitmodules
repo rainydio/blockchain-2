@@ -61,3 +61,9 @@
 [submodule "entry1265/OracleHub"]
 	path = entry1265/OracleHub
 	url = https://github.com/EmelyanenkoK/OracleHub
+[submodule "entry1263/ton-exchange"]
+	path = entry1263/ton-exchange
+	url = https://github.com/cod1ng-studio/ton-exchange
+[submodule "entry1263/TRC20"]
+	path = entry1263/TRC20
+	url = https://github.com/cod1ng-studio/TRC20
