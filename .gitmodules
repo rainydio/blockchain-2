@@ -67,3 +67,12 @@
 [submodule "entry1263/TRC20"]
 	path = entry1263/TRC20
 	url = https://github.com/cod1ng-studio/TRC20
+[submodule "entry1253/ton-contest-2"]
+	path = entry1253/ton-contest-2
+	url = https://github.com/alunegov/ton-contest-2
+[submodule "entry1250/ton-roulette"]
+	path = entry1250/ton-roulette
+	url = https://github.com/gr8den/ton-roulette
+[submodule "entry1256/ton-staking"]
+	path = entry1256/ton-staking
+	url = https://github.com/koinov/ton-staking

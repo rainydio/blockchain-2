@@ -51,11 +51,20 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 - [1247/2 Software Validation by Small Kitten] (incomplete review).  
   Very low quality. Simple. 16 bit seqno. Unnecessary `query_id` instead of `valid_until`.
 
+- [1250 American Roulette by Funny Deer] (complete review).  
+  Very high quality. Simple. No state transitions. Shining!
+
+- [1253 Lottery 3 of 13 by Dreamy Chicken] (incomplete review).  
+  Ok quality. Simple. Incorrectly handles deposits.
+
 - [1254 ICO by Shiny Shrimp] (shallow review).  
   Ok quality. Complex. Currency has to be registered in masterchain.
 
 - [1255 Self Regulated Community by Cuddly Hamster] (incomplete review).  
   Ok quality. Complex. Something ported to funC. Doesn't do what it claims. Contract owner is the only user.
+
+- [1256 Staking pool by Mad Crow] (shallow review).  
+  Low quality. Complex. Vulnerable.
 
 - [1259 Dota2 autochess by Groovy Fly] (shallow review).  
   Low quality. Complex. Some claims aren't about contract. It's only figure shop.
@@ -67,7 +76,7 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Very high quality. Complex. Real. Vulnerable.
 
 - [1261 Stake pool by Slim Dodo] (complete review).  
-  Ok quality. Complex. Almost does what it claims. Incorrectly handles deposits. Pool controlled by administrator. Potential funds lock-out. Can be drained.
+  Ok quality. Complex. Almost does what it claims. Incorrectly handles deposits. Vulnerable.
 
 - [1262 Cheques by Grim Duck] (incomplete review).  
   Very low quality. Simple. Original had major errors. Attempts to set gas limit in grams.
@@ -88,7 +97,7 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Ok quality. Complex. Can be drained.
 
 - [1266/1 ERC20 by Nice Llama] (incomplete review).  
-  Low quality. Simple. Balances within single workchain.
+  Low quality. Simple. Balances within single workchain. No minting. No balance or allowance queries.
 
 - [1266/2 Ring-signature based mixer by Nice Llama] (almost complete review).  
   Very low quality. Simple. Doesn't do what it claims.
@@ -109,18 +118,21 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Low quality. Simple. Doesn't account processing fees.
 
 - [1271 Apportion group expense by Dreamy Pug] (shallow review).  
-  Low quality. Complex. Has vulnerabilities.
+  Low quality. Complex. Vulnerable.
 
 - [1272 Wallet by Lucky Scorpion] (almost complete review).  
-  Very low quality. Simple. Wallet with two keys. Has several vulnerabilities.
+  Very low quality. Simple. Wallet with two keys. Vulnerable.
 
 [mellow squid]: entry1265
 [shiny giraffe]: entry1269
 [1246 multisig by suave beetle]: entry1246#multisig
 [1247/1 ticket system by small kitten]: entry1247#ticket-system
 [1247/2 software validation by small kitten]: entry1247#software-validation
+[1250 american roulette by funny deer]: entry1250#american-roulette
+[1253 lottery 3 of 13 by dreamy chicken]: entry1253#lottery-3-of-13
 [1254 ico by shiny shrimp]: entry1254#ico
 [1255 self regulated community by cuddly hamster]: entry1255#self-regulated-community
+[1256 staking pool by mad crow]: entry1256#staking-pool
 [1259 dota2 autochess by groovy fly]: entry1259#dota2-autochess
 [1259 ton-hack by groovy fly]: entry1259#ton-hack
 [1260 ton delegation pool platform by night turkey]: entry1260#ton-delegation-pool-platform
