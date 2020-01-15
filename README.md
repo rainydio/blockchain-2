@@ -46,7 +46,7 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Nothing to see. Previous submission.
 
 - [1247/1 Ticket System by Small Kitten] (almost complete review).  
-  Very low quality. Complex. 16 bit seqno. Incorrectly handles the fees.
+  Very low quality. Complex. 16 bit seqno. Incorrectly handles deposits.
 
 - [1247/2 Software Validation by Small Kitten] (incomplete review).  
   Very low quality. Simple. 16 bit seqno. Unnecessary `query_id` instead of `valid_until`.
@@ -63,11 +63,11 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 - [1259 Ton-Hack by Groovy Fly] (almost complete review).  
   Low quality. Simple. Only 4 example contracts to hack and they aren't well thought.
 
-- [1260 TON Delegation Pool Platform by Night Turkey] (no review).  
-  Complex. Something real.
+- [1260 TON Delegation Pool Platform by Night Turkey] (almost complete review).  
+  Very high quality. Complex. Real. Vulnerable.
 
 - [1261 Stake pool by Slim Dodo] (complete review).  
-  Ok quality. Complex. Almost does what it claims. Pool controlled by administrator. Potential funds lock-out. Can be drained.
+  Ok quality. Complex. Almost does what it claims. Incorrectly handles deposits. Pool controlled by administrator. Potential funds lock-out. Can be drained.
 
 - [1262 Cheques by Grim Duck] (incomplete review).  
   Very low quality. Simple. Original had major errors. Attempts to set gas limit in grams.
@@ -76,7 +76,7 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Low quality. Simple. Can be drained.
 
 - [1265 The Chat Game by Mellow Squid] (incomplete review).  
-  High quality. Complex. Carefully handles balance and fees.
+  High quality. Complex. Correctly handles deposits!
 
 - [1265 OracleHub by Mellow Squid] (incomplete review).  
   Ok quality. Complex. Can be drained.
@@ -93,8 +93,8 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 - [1268 TON Gate by Big Elk] (no review).  
   Primitive C++ client-server. Server is discovered through TON DHT.
 
-- [1269/1 Conditional transfer by Shiny Giraffe] (shallow review).  
-  Ok quality. Complex. Contradictory claims. Mixes controller address and public key.
+- [1269/1 Conditional transfer by Shiny Giraffe] (complete review).  
+  Ok quality. Spaghetti-level complex. Inefficient. Correctly handles deposits! No exploits found!
 
 - [1269/2 Data storage proxy by Shiny Giraffe] (shallow review).  
   Ok quality. Complex. Almost does what it claims. I don't understand the purpose.

@@ -2,43 +2,96 @@
 
 ## [Conditional transfer]
 
-> - _Multiple beneficiaries_ receiving percentage or fixed amount.
-> - Optional _controller_ that can either _release_ money to beneficiaries or enable _reclaims_.
-> - _Controller_ can be either public key or address.
-> - _Deposit_ and _reclaim_ through simple transfer depending on contract mode.
-> - _Minimum amount_ that has to be collected or _reclaims_ will be enabled.
-> - _Maximum amount_ that has to be collected. Futhure transfers will be returned back to sender.
-> - _Minimum accepted amount_ that will not be returned back to sender.
-> - _Collection deadline_. Aftewards _reclaims_ are enabled if _minimum amount_ isn't collected.
-> - _Continuous collection flag_. Disables _collection deadline_.
-> - _Realease locktime_ until neither _reclaims_ nor _release_ is possible.
-> - _Release deadline_. Next message after deadline triggers _reclaim_ or _release_ (specified by whom???).
-> - _Automatic release_. Default (_reclaim_ or _release_) when no decision was made by _release deadline_.
+> - Multiple _beneficiaries_ receiving percentage or fixed amount.
+> - Two possible contract state transitions after collecting _deposits_:
+>   - _Releasing_ money to _beneficiaries_.
+>   - Enabling _reclaims_.
+> - _Deposit_ and _reclaim_ through simple transfer depending on contract state.
+> - Required _minimum amount_ that has to be collected.
+> - Optional _maximum amount_ that has to be collected, anything above it is returned to sender.
+> - Optional _minimum accepted amount_, _deposits_ lower than that are returned to sender.
+> - Optional _collection deadline_:
+>   - Aftewards _reclaims_ are enabled unless _minimum amount_ was collected.
+>   - Aftewards _deposits_ are disabled unless _continuous collection_ is enabled.
+> - Optional _release deadline_, aftewards required _action_ will transition contract state to:
+>   - _Releasing_ money to _beneficiaries_.
+>   - Enabling _reclaims_.
+> - Optional _controller_:
+>   - Public key or address.
+>   - Can enable _reclaims_.
+>   - Can _release_ money to _beneficiaries_.
+>   - Cannot act until required _release locktime_.
+>   - Cannot act until required _collection deadline_.
+>   - Cannot act after optional _release deadline_.
 
-_There are contradictory claims! Reviewing..._
+Ok quality. Spaghetti-level complex. Does what it claims. Correctly handles deposits! No exploits found!
 
-Ok quality. Complex. Tuples as structure element!
+Although most of the logic is within internal message handler, it's still extremely complex and inefficient. Original description doesn't specify which of the settings are optional.
 
-#### Destroyed check
+### Controller and release locktime
 
-Mixing public key and address creates difficulties. Internal message handler begins with check of destroyed flag, that will immediately send everything to beneficiary:
+It doesn't make sense to have such restriction for controller. Restricting controller actions between collection deadline (if set) and release deadline (if set) is enough and eliminates possible controller lock-out due to release locktime being past release deadline.
+
+### Controller without collection deadline
+
+Surprisingly collection deadline isn't optional when restricting controller (release deadline is optional). There is no way to retrieve funds if contract is created without collection deadline and without release deadline. This is realistic scenario if intent was to collect any amount until controller decides what to do.
+
+```clojure
+() Controller:ReleaseFunds(tuple data, int now) impure {
+  throw_if(31, now < data.[collect_deadline]());
+  throw_if(32, now < data.[release_locktime]());
+  throw_if(33, (data.[release_deadline]() != 0) & (now >= data.[release_deadline]()));
+  ;; ...
+}
+
+() Controller:InitiateReclaim(tuple data, int now) impure {
+  throw_if(31, now < data.[collect_deadline]());
+  throw_if(32, now < data.[release_locktime]());
+  throw_if(33, (data.[release_deadline]() != 0) & (now >= data.[release_deadline]()));
+  ;; ...
+}
+```
+
+### Controller and external message handler
+
+Controller optionally can execute action through external message handler. This is questionable decision given that controller can execute action only once.
+
+Sometimes there are additional checks to call `accept_message`:
+
+```clojure
+() Controller:ReleaseFunds(tuple data, int now) impure {
+  if (data.[ext_controller]()) {
+    accept_message();
+  }
+  Logic:DoRelease(data);
+}
+```
+
+But sometimes there aren't:
+
+```clojure
+() Logic:DoRelease(tuple data) impure {
+  accept_message();
+}
+```
+
+_Also note that `Logic:DoRelease` is called from `Controller:ReleaseFunds` that already called `accept_message`._
+
+And sometimes `accept_message` doesn't make much sense:
 
 ```clojure
 () recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
-	var data = Storage:Load();
-	int Flags = data.[flags_pack]();
-	if (Flags.Destroyed?()) {
-		accept_message();
-		Message:Send(data.[beneficiary_wc](), data.[beneficiary_addr](), 0, MF:AllBalance());
-		return();
-	}
+  if (Flags.Destroyed?()) {
+    accept_message();
+    Message:Send(beneficiary_wc, beneficiary_addr, 0, MF:AllBalance());
+    return();
+  }
+}
 ```
 
-Controller might have sent message as external, which may have failed, and now internal message will finish the job. I think that `accept_message` is artifact of refactoring.
+### Releasing funds
 
-#### Failing to release funds
-
-It appears that multiple beneficiaries were added later. There is main beneficiary and then there are additional ones. There is loop first, and then main beneficiary gets the rest of the balance:
+There is loop over additional beneficiaries first, and then main beneficiary gets the rest of the balance:
 
 ```clojure
 () Logic:DoRelease(tuple data) impure {
@@ -57,9 +110,51 @@ It appears that multiple beneficiaries were added later. There is main beneficia
 }
 ```
 
-Commented out line indicates attempts to send message properly. I guess that destroyed flag check was added to internal handler when message was failing. Then Shiny Giraffe finally settled on suppressing errors with +2 flag. There is also comment about disabled functionaly and high precision percentages. Maybe it's somehow related.
+I don't see reason to `commit` and ignore errors. Total amount sent is tracked, validity of additional beneficiary cell can be checked. If there was no external message handler then amount that has to be sent can be calculated precisely. In any case uncertainty due to it can be contained by subtracting small amount from balance (for processing) that will be sent to main beneficiary at the end.
 
-I don't really know if this function may raise exception. But if it does, then some beneficiaries would not see their money. They all gonna be taken by main beneficiary through internal handler.
+If function that releases funds is safe and correct then there is no reason to keep destroyed flag and questionable backups:
+
+```clojure
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+  if (Flags.Destroyed?()) {
+    accept_message();
+    Message:Send(beneficiary_wc, beneficiary_addr, 0, MF:AllBalance());
+    return();
+  }
+}
+
+() recv_external(slice in_msg) impure {
+  if (Flags.Destroyed?()) {
+    accept_message();
+    Message:Send(data.[beneficiary_wc](), data.[beneficiary_addr](), 0, MF:AllBalance());
+    return();
+  }
+}
+```
+
+_Unnecessary `accept_message` in internal message handler is clearly result of copy-paste._
+
+Main beneficiary can still receive all funds if something goes wrong. This may seem like a rational choice. But on the other hand main beneficiary now has the incentive to intetionally crash release funds function. It's better to be implemented without requiring such backups.
+
+### Multiple data serialization
+
+Data cell is serialized, saved, and sometimes committed (in internal message handler) several times. I see no reason why it could not be saved once at the very end right before return.
+
+### No exloits!
+
+Although contract is complex and has many options that can potentially interact in unexpected ways. I wasn't able to find a single realistic exploit. To give an idea what I was able to find:
+
+```clojure
+if ((max_grams > 0) & (bal + deposit > max_grams)) {
+  deposit = max_grams - bal;
+}
+if (deposit == 0) {
+  Message:Send(src_wc, src_addr, 0, MF:MsgBalance());
+  return ();
+}
+```
+
+This limits deposit so not to surpass `max_grams`. It doesn't assume that `bal` is already higher than `max_grams`. Balance can be increased past `max_grams` with non-bounceable message. As result `deposit` of next message will be negative. Two messages have to be processed immediately after each other. So it only allows validator to reclaim his funds once `max_grams` was reached. Yeah....
 
 ## [Data storage proxy]
 
