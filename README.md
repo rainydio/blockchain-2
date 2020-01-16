@@ -1,34 +1,30 @@
 ## Returning change from processing fee
 
-Several submissions account processing fees wrong by simply sending whole fee back. Usually it looks like this:
+Many contract that accept deposits do not account processing fees. Usually whole `msg_value` is added to deposit. [Mellow Squid] uses simple technique to return change from processing fee:
 
 ```clojure
-int value = msg_value - fee;
-if (value < 0) {
-  return send_message_back(s_addr, 0xee6f454c, 0, 0, 0, 64);
-}
-;; ... buy something for `value`
-return send_message_back(s_addr, 0xf374484c, 0, 0, fee, 2);
-```
-
-[Mellow Squid] and [Shiny Giraffe] use simple technique to return change from processing fee:
-
-```clojure
-raw_reserve(get_balance().first() - fee, 0);
+raw_reserve(get_balance().first() - processing_grams_max, 0);
 send_message_back(s_addr, 0xf374484c, 0, 0, 0, 128);
 ```
 
-### Send raw message +2 flag
+[Shiny Giraffe] also uses exact same technique:
 
-It appears that wrong code to return change was taken from `elector-code.fc`. I haven't checked standard contracts yet...
+```clojure
+raw_reserve(get_balance().first() - msg_value + deposit, 0);
+send_message_back(s_addr, 0xf374484c, 0, 0, 0, 128);
+```
 
-> _- Знаешь, что говорит уточка?_  
-> _- ???_  
-> _- Зря-зря_
+### Suppressing `send_raw_message` errors
 
-But generally any `send_raw_message` +2 usage indicates that there is something wrong with how funds are handled. Otherwise why there is error at all? Carefully crafted message may leave contract with very small yet still positive balance, instead of being skipped by +2.
+Generally any `send_raw_message` +2 usage indicates that contract balance is lower than expected. Otherwise why there is error at all? At some point during processing withdrawal ignoring the error will lock someone's funds. As result real balance will become higher than expected, and contract will continue operating normally repeating the cycle.
 
-Because `elector-code.fc` also contains `accept_message` this can be used to destroy contract completely. I'm not sure if it is possible to destroy contract if it has very small balance, but does not contain `accept_message`.
+It will look like random glitch and those who are unlucky will complain on the internet.
+
+### Contract paying for processing
+
+Many contracts contain `accept_message`, `set_gas_limit`, or `buy_gas` calls within internal message handler. It's often combined with `send_raw_message` +2 because gas consumed creates severe discrepancy between real and expected balance. Due to fatal misfortune or deliberate act of sabotage, processing withdrawal may leave contract with small yet still positive balance. It will run out of funds during next `accept_message`.
+
+I haven't reviewed standard contracts yet, but [Slim Dodo] copied erroneous code from `elector-code.fc`
 
 ## Reviews
 
@@ -40,6 +36,18 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 - almost complete review
 - complete review
 
+Not in the list, will add them later except:
+
+- [Classy Bee]. It's good, we all know that.
+- [Eager Boar]. It's meh. Reviewed it in comments.
+- [Hip Hyena]. So many errors. Reviewed it in comments.
+- [Bold Wolf]. It's terrible. Reviewd it in comments.
+
+In the list, but need some additional work:
+
+- [Big Elk]. Appears to be simplest client-server C++ app.
+- [Mad Crow]. So many errors. Difficult to untangle.
+
 ### Submissions
 
 - [1246 Multisig by Suave Beetle] (shallow review).  
@@ -50,6 +58,12 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 
 - [1247/2 Software Validation by Small Kitten] (incomplete review).  
   Low quality. Simple. 16 bit seqno.
+
+- [1249/1 Contract manager by Desert Falcon] (shallow review).  
+  Very low quality. Simple.
+
+- [1249/2 Messenger by Desert Falcon] (shallow review).  
+  Low quality. Simple.
 
 - [1250 American Roulette by Funny Deer] (complete review).  
   Very high quality. Simple. Stateless. Shining!
@@ -123,11 +137,20 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 - [1272 Wallet by Lucky Scorpion] (almost complete review).  
   Very low quality. Simple. Wallet with two keys. Vulnerable.
 
+[classy bee]: https://contest.com/blockchain-2/entry1258
+[eager boar]: https://contest.com/blockchain-2/entry1248
+[hip hyena]: https://contest.com/blockchain-2/entry1251
+[bold wolf]: https://contest.com/blockchain-2/entry1257
 [mellow squid]: entry1265
 [shiny giraffe]: entry1269
+[slim dodo]: entry1261
+[big elk]: entry1268
+[mad crow]: entry1256
 [1246 multisig by suave beetle]: entry1246#multisig
 [1247/1 ticket system by small kitten]: entry1247#ticket-system
 [1247/2 software validation by small kitten]: entry1247#software-validation
+[1249/1 contract manager by desert falcon]: entry1249#contract-manager
+[1249/2 messenger by desert falcon]: entry1249#messenger
 [1250 american roulette by funny deer]: entry1250#american-roulette
 [1253 lottery 3 of 13 by dreamy chicken]: entry1253#lottery-3-of-13
 [1254 ico by shiny shrimp]: entry1254#ico

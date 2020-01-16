@@ -76,3 +76,9 @@
 [submodule "entry1256/ton-staking"]
 	path = entry1256/ton-staking
 	url = https://github.com/koinov/ton-staking
+[submodule "entry1249/contract_manager"]
+	path = entry1249/contract_manager
+	url = https://github.com/AlexGor-dev/contract_manager.git
+[submodule "entry1249/messenger"]
+	path = entry1249/messenger
+	url = https://github.com/AlexGor-dev/messenger
