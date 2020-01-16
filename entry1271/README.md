@@ -14,9 +14,31 @@ Low quality. Complex.
 
 Suprisingly although contract stores both member addresses and member public keys. Addresses are used only to authenticate transfer sender.
 
+### Incorrectly settles debtor balance
+
+In internal handler it first dispatches payments and then incorrectly credist whole amount to sender.
+
+```clojure
+() recv_internal(int amount, cell in_msg_cell, slice in_msg) impure {
+  int credit_amount = 0;
+  do {
+    (..., d, credit_amount) = creditor_lookup(members, s_addr, amount - credit_amount, tolerance);
+    if (credit_amount) {
+      dispatch_payment(d, credit_amount);
+      members~settle_creditor_balance(d, credit_amount);
+    }
+  } until (~ credit_amount);
+  members~settle_debtor_balance(source_id, amount); ;; amount - credit_amount
+}
+```
+
+### Inefficient
+
+For each payment `creditor_lookup` is called that goes through all `members` dictionary and uses array-style indexing.
+
 ### Any member can withdraw to any address
 
-Contract allows any member to withdraw any amount to any address:
+Contract doesn't keep funds and dispatches payments immediately. If someone sent extra, funds can be stolen by any memeber:
 
 ```clojure
 ;; withdraw grams from smc balance

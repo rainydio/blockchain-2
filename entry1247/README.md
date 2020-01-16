@@ -7,9 +7,9 @@
 > - Price cannot be changed during the contract lifetime.
 > - End of sale can not be changed.
 > - End of refunds and refunds percentage are configurable.
-> - To verify the owner of ticket: the verifier gives one time code to the owner which has to sign it. One time code is passed as data along with owner and signature cell to the method. `proof_ownership` returns -1 if signature matches or 0 otherwise.
+> - Verifier gives one time code to the owner to sign. Signature is checked through get method.
 
-Very low quality. Complex. Does what it claims.
+Lowish quality. Complex.
 
 ### Buying tickets
 
@@ -34,11 +34,11 @@ I would rather expect tickets to have unique numbers to help verifier with repla
 
 ### Refunds
 
-Refunds check signature, seqno of internal message and send refund back to source address. If ticket owner isn't careful what he signs during verification then verifier may sign refund requests, then cancel event, then run with all of the money.
+Refunds are processed through internal message handler, but authenticated by public key. Ticket owner has to carefully check _one time code_ that he signs. It might be refund request crafted by verifier.
 
 ### 16 bit seqno
 
-Contract `seqno` is only 16 bit long, and there is attempt to loop it (great idea!). But it isn't stored in final data.
+Contract `seqno` is only 16 bit long, and there is attempt to loop it. But it isn't stored in final data.
 
 ```clojure
 if (query_seq == 65535) { ;; reset query number
@@ -53,8 +53,17 @@ return ();
 > - Registry to provide hash validation of obtained binaries.
 > - External messages allows contract owner to manipulate hash registry.
 > - It is possible to set or remove hash record.
+> - Records might have expiration.
 
-This is really just an interface to a dictionary. It's simple, but poorly written.
+Low quality. Simple.
+
+### Expiration
+
+Expiration affects `validate` call result. Expired records are not removed. But why there is expiration at all in such registry? How file integrity hash can expire?
+
+### Purposeless
+
+Records can be changed and removed. Public key cannot be changed, so it has to be protected forever. Simply signing the hash itself provides same level of security.
 
 ### Unecessary query_id
 

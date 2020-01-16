@@ -46,28 +46,28 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Nothing to see. Previous submission.
 
 - [1247/1 Ticket System by Small Kitten] (almost complete review).  
-  Very low quality. Complex. 16 bit seqno. Incorrectly handles deposits.
+  Lowish quality. Complex. 16 bit seqno. Incorrectly handles deposits.
 
 - [1247/2 Software Validation by Small Kitten] (incomplete review).  
-  Very low quality. Simple. 16 bit seqno. Unnecessary `query_id` instead of `valid_until`.
+  Low quality. Simple. 16 bit seqno.
 
 - [1250 American Roulette by Funny Deer] (complete review).  
-  Very high quality. Simple. No state transitions. Shining!
+  Very high quality. Simple. Stateless. Shining!
 
 - [1253 Lottery 3 of 13 by Dreamy Chicken] (incomplete review).  
-  Ok quality. Simple. Incorrectly handles deposits.
+  Ok quality. Simple. Sloppy probabilities. Incorrectly handles deposits.
 
 - [1254 ICO by Shiny Shrimp] (shallow review).  
-  Ok quality. Complex. Currency has to be registered in masterchain.
+  Lowish quality. Complex. Currency has to be registered in masterchain.
 
 - [1255 Self Regulated Community by Cuddly Hamster] (incomplete review).  
-  Ok quality. Complex. Something ported to funC. Doesn't do what it claims. Contract owner is the only user.
+  Highish quality. Complex. Something ported to funC. Doesn't do what it claims. Contract owner is the only user.
 
 - [1256 Staking pool by Mad Crow] (shallow review).  
   Low quality. Complex. Vulnerable.
 
-- [1259 Dota2 autochess by Groovy Fly] (shallow review).  
-  Low quality. Complex. Some claims aren't about contract. It's only figure shop.
+- [1259 Dota2 autochess by Groovy Fly] (incomplete review).  
+  Lowish quality. Complex. Shop and simple matchmaking.
 
 - [1259 Ton-Hack by Groovy Fly] (almost complete review).  
   Low quality. Simple. Only 4 example contracts to hack and they aren't well thought.
@@ -76,16 +76,16 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   Very high quality. Complex. Real. Vulnerable.
 
 - [1261 Stake pool by Slim Dodo] (complete review).  
-  Ok quality. Complex. Almost does what it claims. Incorrectly handles deposits. Vulnerable.
+  Highish quality. Complex. Almost does what it claims. Incorrectly handles deposits. Vulnerable.
 
 - [1262 Cheques by Grim Duck] (incomplete review).  
-  Very low quality. Simple. Original had major errors. Attempts to set gas limit in grams.
+  Very low quality. Simple. Original had major errors. Front-running.
 
-- [1263/1 Decentralized Exchange by Merry Ant] (shallow review).  
+- [1263/1 Decentralized Exchange by Merry Ant] (incomplete review).  
   Very low quality. Complex. Extremely vulnerable.
 
 - [1263/2 TRC20 by Merry Ant] (complete review).  
-  Low quality. Simple. No minting. No balance or allowance queries. Vulnerable. Clean!
+  Lowish quality. Simple. Vulnerable. Clean!
 
 - [1264 Lottery by Dreamy Crab] (incomplete review).  
   Low quality. Simple. Can be drained.
@@ -94,22 +94,22 @@ Most submission pages contain aggregate claims that were combined by me. So plea
   High quality. Complex. Correctly handles deposits!
 
 - [1265 OracleHub by Mellow Squid] (incomplete review).  
-  Ok quality. Complex. Can be drained.
+  High quality. Complex. Can be drained.
 
 - [1266/1 ERC20 by Nice Llama] (incomplete review).  
-  Low quality. Simple. Balances within single workchain. No minting. No balance or allowance queries.
+  Low quality. Simple. Balances within single workchain.
 
 - [1266/2 Ring-signature based mixer by Nice Llama] (almost complete review).  
   Very low quality. Simple. Doesn't do what it claims.
 
 - [1267 MLM by Funny Owl] (shallow review).  
-  Lowest quality. I don't even understand how it supposed to be used.
+  Extremely low quality. I don't understand how it supposed to be used.
 
 - [1268 TON Gate by Big Elk] (no review).  
   Primitive C++ client-server. Server is discovered through TON DHT.
 
 - [1269/1 Conditional transfer by Shiny Giraffe] (complete review).  
-  Ok quality. Spaghetti-level complex. Inefficient. Correctly handles deposits! No exploits found!
+  Lowish quality. Spaghetti-level complex. Inefficient. Correctly handles deposits! No exploits found!
 
 - [1269/2 Data storage proxy by Shiny Giraffe] (shallow review).  
   Ok quality. Complex. Almost does what it claims. I don't understand the purpose.
@@ -117,7 +117,7 @@ Most submission pages contain aggregate claims that were combined by me. So plea
 - [1270 Charity Foundation by Dreamy Snail] (incomplete review).  
   Low quality. Simple. Doesn't account processing fees.
 
-- [1271 Apportion group expense by Dreamy Pug] (shallow review).  
+- [1271 Apportion group expense by Dreamy Pug] (incomplete review).  
   Low quality. Complex. Vulnerable.
 
 - [1272 Wallet by Lucky Scorpion] (almost complete review).  

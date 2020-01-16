@@ -18,7 +18,7 @@ There was discussion in the [comments]:
 > Thanks! This is an absurd mistake that made recv_external critically wrong. I fixed it in the repository.  
 > ... by Merry Ant
 
-This contract has even worse external message handler implementation:
+This contract has even worse external message handler:
 
 ```clojure
 () recv_external(slice sender, slice in_msg) impure {
@@ -75,10 +75,10 @@ There is no whitelist of tokens. Contract is paying for queries and this can be 
 ## [TRC20]
 
 > - Usual constants `name`, `symbol`, `decimals`.
-> - Total supply is also constant assigned to single address.
+> - Total supply assigned to single address.
 > - Three ususal operations `transfer`, `transfer_from`, `approve`.
 
-Low quality. Simple. No minting. No balance or allowance queries. Clean!
+Lowish quality. Simple. Clean!
 
 ### Initialization front-running
 

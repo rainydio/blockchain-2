@@ -7,7 +7,7 @@
 > - User’s voting power is calculated periodically (once a day).
 > - Donations that are distributed 70% to author, 20% to top 15 users, 10% commissions.
 
-Ok quality. Complex. Doesn't do what it claims. Looks like some rating system ported to func.
+Highish quality. Complex. Doesn't do what it claims. Looks like some rating system ported to funC.
 
 ### Contract owner is the only user
 

@@ -2,17 +2,17 @@
 
 ## [TON Delegation Pool Platform]
 
-> - Distinct state transitions from Init setting deadline.
-> - ... into Delegation for collecting deposits.
-> - ... after deadline into NeedToStakeToElect to send stake to elect:
->   - ... after elect callback WaitingForNextVset.
->   - ... after elected time WaitingToWithdrawFundsFromElector.
->   - ... after vset deadline NeedToWithdrawFundsFromElector to withdraw from elect.
->   - ... after elect callback CanWithdrawalFromDelegationPool to withdraw.
->   - ... after 2 months ValidatorCanWithdrawRemainingFunds2 to withdraw remaining by owner.
-> - Or if stake to elect wasn't sent:
->   - ... after questionable time NotStakedToElectOnTime to recover stake.
->   - ... after 2 months ValidatorCanWithdrawRemainingFunds1 to withdraw remaining by owner.
+> - Distinct state transitions from Init setting _deadline_.
+> - ... into Delegation collecting deposits.
+> - ... after _deadline_ into NeedToStakeToElect to send _stake to elect_:
+>   - ... after _elect callback_ WaitingForNextVset.
+>   - ... after _elected time_ WaitingToWithdrawFundsFromElector.
+>   - ... after _vset deadline_ NeedToWithdrawFundsFromElector to _withdraw from elect_.
+>   - ... after _elect callback_ CanWithdrawalFromDelegationPool to _withdraw_.
+>   - ... after 2 months ValidatorCanWithdrawRemainingFunds2 to _withdraw remaining_ by owner.
+> - Or if _stake to elect_ wasn't sent:
+>   - ... after questionable time NotStakedToElectOnTime to _recover stake_.
+>   - ... after 2 months ValidatorCanWithdrawRemainingFunds1 to _withdraw remaining_ by owner.
 > - Owner (validator) is handling processing fees.
 
 Very high quality. Complex.
@@ -62,7 +62,9 @@ Delegators are required to send public key, but it isn't used for signaure check
 
 It's possible to have two delegate stakes from same address but with different keys. As result there is separate `credits` dictionary indexed by address (only last 256u part) that contains amount that can be withdrawn. When it's built additional checks are implemented to handle that one address with two keys case.
 
-I think better approach would be to simply hash address and use that as dictionary index. That way `credits` dictionary may also be removed.
+### Recovering stake
+
+Deposits are not accounting processing fees. Stakes are simply sums of `msg_value` sent. Moreover it appears that contract deliberately calls `accept_message` when it authenticates delegate. If stake wasn't sent, then delegators are allowed to recover their stakes. There won't be enough money to recover all of them.
 
 [1260 by night turkey]: https://contest.com/blockchain-2/entry1260
 [ton delegation pool platform]: https://github.com/button-tech/ton-delegation-pool/blob/e970e738746f04a73a95d4bbde87461fd7d93bf4/contracts/v3/delegation_pool_v3.fc

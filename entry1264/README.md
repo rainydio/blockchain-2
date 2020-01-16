@@ -6,7 +6,7 @@
 > - Later contract sets a win amount for each square.
 > - Contract will send money back on its own.
 
-Low quality. Simple. Does what it claims.
+Low quality. Simple.
 
 ### Address is taken from message
 
@@ -30,6 +30,22 @@ It is possible to drain contract out of funds, because it will return full `msg_
   ;; ...
   throw_if(35, balance < 0);
   send_grams(address, balance);
+```
+
+### Implicit floating point arithmetic
+
+I didn't calculated consequences:
+
+```clojure
+tuple create_multipliers() impure {
+	var arr = new_tuple();
+	int i = 0;
+	repeat (16) {
+		arr~tpush(i * i * i / 13);
+		i += 1;
+	}
+	return arr;
+}
 ```
 
 [1264 by dreamy crab]: https://contest.com/blockchain-2/entry1264

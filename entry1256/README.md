@@ -133,15 +133,17 @@ if( in_msg.slice_empty?() ) {
 
 ---
 
-> _вход — рубль, выход — два_
-
-Subtle hardcoded workchain check, easy deposit, difficult withdraw:
+Subtle hardcoded workchain check:
 
 ```clojure
 () process_redeem(slice s_addr, int query_id, int subscription_id) impure {
   throw_unless(43, (src_wc == 0) & (src_addr == subscriber) ); ;; subscription doesn't belong to sender
 }
 ```
+
+> _вход — рубль, выход — два_
+
+_easy deposit, difficult withdrawal_
 
 [1256 by mad crow]: https://contest.com/blockchain-2/entry1256
 [staking pool]: https://github.com/koinov/ton-staking/tree/535b658bdbd7f86a70710ca31e43cb4acac2554f/staking/smartcont

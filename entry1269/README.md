@@ -24,7 +24,7 @@
 >   - Cannot act until required _collection deadline_.
 >   - Cannot act after optional _release deadline_.
 
-Ok quality. Spaghetti-level complex. Does what it claims. Correctly handles deposits! No exploits found!
+Lowish quality. Spaghetti-level complex. Correctly handles deposits! No exploits found!
 
 Although most of the logic is within internal message handler, it's still extremely complex and inefficient. Original description doesn't specify which of the settings are optional.
 

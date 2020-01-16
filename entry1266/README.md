@@ -12,19 +12,6 @@ Low quality. Simple. Almost does what it claims, but what it claims!
 
 Contract doesn't allow to send tokens between workchains. Dictionary with balances is stored within dictionary with workchains. Functions that handle workchains and errors are wrapped around balance functions. They were clearly written afterwards by a different person. Could have just rejected any message from workchain different than used by contract.
 
-### No minting
-
-There is no mechanism for minting tokens. In example `deploy.fif` whole supply is assigned to owner address. And owner has to send those out through separate transfers.
-
-```fsharp
-// setup balances to give owner_address the entire supply
-variable network_balances dictnew network_balances !
-<b supply 256 u, b> <s owner_address network_balances @ 256 udict! drop network_balances !
-<b network_balances @ ref, wc balances @ 8 b>idict! drop balances !
-```
-
-As result `supply` is just another constant like `name`, `symbol`, and `decimal`. In real ERC20 `supply` is sum of tokens minted.
-
 ### Isn't ready to be used with lite-client
 
 Couple of methods simply return whole dictionary with balances. And they forgot to update comment there, it's now wrapped into workchain dictionary.
@@ -45,10 +32,6 @@ cell getapprovals() method_id {
 
 At the same time `getbalance` is more advanced, and walks through dictionaries to get balance.
 
-### Queries
-
-Contract doesn't implement simple queries such to get balance. But it send back distinct responses if no allowance was set, so this can be sort-of used instead.
-
 ## [Ring-signature based mixer]
 
 > - Find friends and use this contract to mix your outputs.
@@ -61,7 +44,7 @@ Very low quality. Simple. Doesn't do what it claims.
 
 > Find friends and use this contract to mix your outputs
 
-With friends??? This is just ridiculous right from the start.
+With friends???
 
 ### RSA on funC
 

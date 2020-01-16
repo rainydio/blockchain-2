@@ -4,7 +4,7 @@
 
 > - American Roulette.
 > - Immediate.
-> - No state transitions. Relies on probabilities.
+> - Stateless. Relies on probabilities.
 
 Very high quality. Simple. Shining!
 

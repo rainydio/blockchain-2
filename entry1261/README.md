@@ -2,14 +2,14 @@
 
 ## [Stake pool]
 
-> - Collect funds for some purpose and the subsequently redistribute profits.
+> - Collect funds and then subsequently redistribute profits.
 > - Optional whitelist of participants.
-> - Participant must transfer N + 1 gram to the given address (required for commission fees, the surplus will be returned to participant's account).
-> - After collecting all the necessary funds, the pool administrator can transfer the funds to the destination address.
-> - After receiving transfer from the destination address, pool administrator can re-transfer the funds to the destination address.
-> - After the end of the pool’s lifetime, each participant can submit a request from 1 gram to proportional balance distribution.
+> - Participant must transfer N + 1 gram to the given address.
+> - After collecting funds, pool administrator transfers then to destination address.
+> - After receiving transfer from destination address, pool administrator may re-transfer it back to destination address.
+> - After the end of pool’s lifetime, each participant can withdraw from 1 gram to proportional balance distribution.
 
-Ok quality. Complex. Almost does what it claims.
+Highish quality. Complex. Almost does what it claims.
 
 ### Dictionary indexed by 256u address
 
@@ -86,7 +86,7 @@ Also funds may be locked out, because `send_raw_message` mode 3 is used. Contrac
 
 ### Withdrawals
 
-> - After the end of the pool’s lifetime, each participant can submit a request from 1 gram to proportional balance distribution.
+> - After the end of pool’s lifetime, each participant can withdraw from 1 gram to proportional balance distribution.
 
 This isn't implemented, but there were attempts. Contract tracks balance separately in `grams` variable, stores `amount` in `withdrawals` dictionary, but then simply rejects if previous withdrawal was found:
 
