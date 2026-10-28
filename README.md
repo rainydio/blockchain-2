@@ -1,3 +1,32 @@
+# TON Smart Contract Contest — Security Review (2019)
+
+In autumn 2019 Telegram ran a series of open contests on
+[contest.com](https://contest.com) to build smart contracts for the
+Telegram Open Network (TON) blockchain, written in FunC.
+
+After competing in the contest myself, I was commissioned by Telegram to
+review the submissions of the second round ("blockchain-2") and report
+issues to the judging panel. This repository is that review.
+
+**Scope:** 26 submissions reviewed, with 22 covered in dedicated folders
+(`entryNNNN`) and the rest in inline comments.
+
+**Typical findings:**
+- contracts whose funds could be drained by an attacker
+- front-running of user operations
+- undersized sequence numbers that allow wrap-around and replay
+- suppressed message-send errors that silently lock user funds
+- processing fees not accounted for, or paid from the contract's own balance
+- flawed code copied from reference contracts
+
+The sections below cover issues common to many entries, followed by
+per-entry reviews. Review depth varies (see the legend in *Reviews*):
+it was a time-boxed engagement, so some entries got a full audit and
+others a shallow pass.
+
+Contestant names on contest.com were anonymous nicknames (e.g. "Mellow
+Squid"); I keep them here as they appeared on the portal.
+
 ## Returning change from processing fee
 
 Many contract that accept deposits do not account processing fees. Usually whole `msg_value` is added to deposit. [Mellow Squid] uses simple technique to return change from processing fee:
